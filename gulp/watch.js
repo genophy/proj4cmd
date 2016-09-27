@@ -1,0 +1,161 @@
+var gulp = require("gulp"),
+    watch = require("gulp-watch"),
+    Config = require("./config"),
+    Script = require("./script");
+
+/*
+ * 监视文件变动
+ */
+gulp.task("watch", function () {
+
+    return Config.gulpVerifyArgumentName(process, "watch", "project", function (projectName) {
+        var srcPath = "./src/#project#/view/".replace("#project#", projectName),
+            resPath = srcPath.replace("/view/", "/res/"),
+            stylePath = srcPath.replace("/view/", "/style/"),
+            cmptPath = "./module/cmpt/",
+            cmpt3rdPath = "./module/cmpt3rd/",
+            currentDir = process.cwd();
+        // src - html
+        gulp.watch([srcPath.concat("**/*.app.html")])
+            .on("change", function (file) {
+                var singleFile = ".".concat(file.path.replace(currentDir, ""));
+                console.log("changed:" + singleFile);
+                Script.html(projectName, singleFile);
+            });
+
+        // src - ts
+        gulp.watch([srcPath.concat("**/*.app.ts")])
+            .on("change", function (file) {
+                var singleFile = ".".concat(file.path.replace(currentDir, ""));
+                console.log("changed:" + singleFile);
+                Script.tsc(projectName, singleFile);
+            });
+
+        // cmpt - ts
+        gulp.watch([cmptPath.concat("**/*.ts")], ["tsc"]);
+
+        // src - js
+        gulp.watch([srcPath.concat("**/*.app.js")])
+            .on("change", function (file) {
+                var singleFile = ".".concat(file.path.replace(currentDir, ""));
+                console.log("changed:" + singleFile);
+                Script.webpack(projectName, singleFile);
+            });
+        // cmpt - js
+        gulp.watch([cmptPath.concat("**/*.js")], ["webpack"]);
+
+        // res - img 
+        gulp.watch([resPath.concat("**/*")])
+            .on("change", function (file) {
+                var singleFile = ".".concat(file.path.replace(currentDir, ""));
+                console.log("changed:" + singleFile);
+                Script.img(projectName, singleFile);
+            });
+
+        // src - scss
+        gulp.watch([srcPath.concat("**/*.app.scss")])
+            .on("change", function (file) {
+                var singleFile = ".".concat(file.path.replace(currentDir, ""));
+                console.log("changed:" + singleFile);
+                Script.scss(projectName, singleFile);
+            });
+        // cmpt - scss
+        gulp.watch([stylePath.concat("**/*.scss"), cmptPath.concat("**/*.scss")], ["scss"]);
+
+        // src - less
+        gulp.watch([srcPath.concat("**/*.app.less")])
+            .on("change", function (file) {
+                var singleFile = ".".concat(file.path.replace(currentDir, ""));
+                console.log("changed:" + singleFile);
+                Script.less(projectName, singleFile);
+            });
+
+        // cmpt - less
+        gulp.watch([stylePath.concat("**/*.less"), cmptPath.concat("**/*.less")], ["less"]);
+
+        // cmpt3rd
+        gulp.watch([cmpt3rdPath.concat("**/*")], ["cmpt3rd"]);
+    });
+
+});
+
+
+
+/*
+ * 监视文件变动(release)
+ */
+gulp.task("watch:release", function () {
+
+    return Config.gulpVerifyArgumentName(process, "watch", "project", function (projectName) {
+        var srcPath = "./src/#project#/view/".replace("#project#", projectName),
+            resPath = srcPath.replace("/view/", "/res/"),
+            stylePath = srcPath.replace("/view/", "/style/"),
+            cmptPath = "./module/cmpt/",
+            cmpt3rdPath = "./module/cmpt3rd/",
+            currentDir = process.cwd();
+
+        // src - html
+        gulp.watch([srcPath.concat("**/*.app.html")])
+            .on("change", function (file) {
+                var singleFile = ".".concat(file.path.replace(currentDir, ""));
+                console.log("changed:" + singleFile);
+                Script.html_release(projectName, singleFile);
+            });
+
+        // src - ts
+        gulp.watch([srcPath.concat("**/*.app.ts")])
+            .on("change", function (file) {
+                var singleFile = ".".concat(file.path.replace(currentDir, ""));
+                console.log("changed:" + singleFile);
+                Script.tsc(projectName, singleFile);
+            });
+
+        // cmpt - ts
+        gulp.watch([cmptPath.concat("**/*.ts")], ["tsc"]);
+
+        // src - js
+        gulp.watch([srcPath.concat("**/*.app.js")])
+            .on("change", function (file) {
+                var singleFile = ".".concat(file.path.replace(currentDir, ""));
+                console.log("changed:" + singleFile);
+                Script.webpack_release(projectName, singleFile);
+            });
+
+        // cmpt - js
+        gulp.watch([cmptPath.concat("**/*.js")], ["webpack:release"]);
+
+        // res - img 
+        gulp.watch([resPath.concat("**/*")])
+            .on("change", function (file) {
+                var singleFile = ".".concat(file.path.replace(currentDir, ""));
+                console.log("changed:" + singleFile);
+                Script.img(projectName, singleFile);
+            });
+
+        // src - scss
+        gulp.watch([srcPath.concat("**/*.app.scss")])
+            .on("change", function (file) {
+                var singleFile = ".".concat(file.path.replace(currentDir, ""));
+                console.log("changed:" + singleFile);
+                Script.scss_release(projectName, singleFile);
+            });
+        // cmpt - scss
+        gulp.watch([stylePath.concat("**/*.scss"), cmptPath.concat("**/*.scss")], ["scss:release"]);
+
+        // src - less
+        gulp.watch([srcPath.concat("**/*.app.less")])
+            .on("change", function (file) {
+                var singleFile = ".".concat(file.path.replace(currentDir, ""));
+                console.log("changed:" + singleFile);
+                Script.less_release(projectName, singleFile);
+            });
+
+        // cmpt - less
+        gulp.watch([stylePath.concat("**/*.less"), cmptPath.concat("**/*.less")], ["less:release"]);
+
+        // cmpt3rd
+        gulp.watch([cmpt3rdPath.concat("**/*")], ["cmpt3rd:release"]);
+
+    });
+
+});
