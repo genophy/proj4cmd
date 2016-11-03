@@ -97,8 +97,6 @@ exports.create_init = function (projectName) {
 };
 
 
-
-
 /*
  * 创建项目下的模块 
  * 
@@ -141,14 +139,13 @@ exports.create_view = function (projectName, viewName) {
 };
 
 
-
 /*
-*
-*
-* 将 *.app.html 复制替换为 dest目录下的*.html
-*
-*
-*/
+ *
+ *
+ * 将 *.app.html 复制替换为 dest目录下的*.html
+ *
+ *
+ */
 exports.html = function (projectName, singleFile) {
     projectName = projectName || Config.gulpArgumentNameExist(process, "project");
     singleFile = singleFile || Config.gulpArgumentNameExist(process, "singlefile");
@@ -170,12 +167,12 @@ exports.html = function (projectName, singleFile) {
 
 
 /*
-*
-*
-* 将 *.app.html 复制替换为 dest目录下的*.html (release)
-*
-*
-*/
+ *
+ *
+ * 将 *.app.html 复制替换为 dest目录下的*.html (release)
+ *
+ *
+ */
 exports.html_release = function (projectName, singleFile) {
     projectName = projectName || Config.gulpArgumentNameExist(process, "project");
     singleFile = singleFile || Config.gulpArgumentNameExist(process, "singlefile");
@@ -186,13 +183,13 @@ exports.html_release = function (projectName, singleFile) {
         releasePath = srcPath.replace("./src", "./dest/release");
     // 若是单个文件，则src改成单文件路径
     srcPath = singleFile || srcPath.concat("**/*.app.html");
-    
+
     return gulp.src(srcPath)
         .pipe(rename(function (path) {
             path.basename = path.basename.replace(".app", "");
             path.dirname = path.basename;
         }))
-        .pipe(htmlmin({ collapseWhitespace: true }))
+        .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest(releasePath));
 };
 
@@ -351,7 +348,7 @@ exports.scss_release = function (projectName, singleFile) {
     if (!projectName) {
         throw new Error("scss_release no projectname");
     }
-   	var srcPath = "./src/#project#/view/".replace("#project#", projectName),
+    var srcPath = "./src/#project#/view/".replace("#project#", projectName),
         releasePath = srcPath.replace("./src", "./dest/release").replace("/view/", "/css/");
     // 若是单个文件，则src改成单文件路径
     srcPath = singleFile || srcPath.concat("**/*.app.scss");
@@ -366,7 +363,6 @@ exports.scss_release = function (projectName, singleFile) {
         .pipe(cssmin())
         .pipe(gulp.dest(releasePath));
 };
-
 
 
 /*
@@ -394,7 +390,7 @@ exports.tsc = function (projectName, singleFile) {
 
     return gulp.src(srcPath)
         .pipe(ts())
-        .pipe(gulp.dest(destPath));
+        .pipe(gulp.dest(singleFile ? srcPath.replace(/[^/]*.app.ts$/, "") : destPath));
 
 };
 
