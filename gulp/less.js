@@ -12,7 +12,7 @@ var gulp = require("gulp"),
  * 
  * *.app.css <_ *.app.less <_ *.app.scss
  */
-gulp.task("less", ["scss"], function () {
+gulp.task("less", function () {
 	return Script.less();
 });
 
@@ -26,6 +26,6 @@ gulp.task("less", ["scss"], function () {
  * 
  * *.app.css <_ *.app.less <_ *.app.scss
  */
-gulp.task("less:release", ["scss:release"], function () {
+gulp.task("less:release", function () {
 	return Script.less_release();
 }); 
