@@ -6,7 +6,7 @@ var gulp = require("gulp"),
  * 	command:	gulp --project=<projectname> 
  *  
  */
-gulp.task("default_start",["scss","less","tsc","img","html","cmpt3rd"],function(){
+gulp.task("default_start",["scss","less","tsc","webpack","img","html","cmpt3rd"],function(){
 });
 
 
@@ -15,6 +15,6 @@ gulp.task("default_start",["scss","less","tsc","img","html","cmpt3rd"],function(
  * 	command:	gulp --project=<projectname> 
  *  
  */
-gulp.task("default_start:release",["scss:release","less:release","tsc","img:release","html:release","cmpt3rd:release"],function(){
+gulp.task("default_start:release",["scss:release","less:release","tsc","webpack:release","img:release","html:release","cmpt3rd:release"],function(){
 });
  
