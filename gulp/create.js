@@ -15,9 +15,6 @@ var gulp = require("gulp"),
  *   |-----less
  *   |-------site.less
  *   |-------variable.less
- *   |-----scss
- *   |-------site.scss
- *   |-------variable.scss
  * 
  */
 
@@ -38,7 +35,6 @@ gulp.task("create:init", function () {
  *    |-----viewname.app.html
  *    |-----viewname.app.js
  *    |-----viewname.app.less
- *    |-----viewname.app.scss
  *    |-----viewname.app.ts`
  * 
  */

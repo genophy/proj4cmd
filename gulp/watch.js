@@ -44,23 +44,22 @@ gulp.task("watch", function () {
         // cmpt - js
         gulp.watch([cmptPath.concat("**/*.js")], ["webpack"]);
 
-        // res - img 
-        gulp.watch([resPath.concat("**/*")])
+        // res - img  
+        gulp.watch([resPath.concat("img/**/*")])
             .on("change", function (file) {
                 var singleFile = ".".concat(file.path.replace(currentDir, ""));
                 console.log("changed:" + singleFile);
                 Script.img(projectName, singleFile);
             });
-
-        // src - scss
-        gulp.watch([srcPath.concat("**/*.app.scss")])
+        
+        // res - json  
+        gulp.watch([resPath.concat("json/**/*")])
             .on("change", function (file) {
                 var singleFile = ".".concat(file.path.replace(currentDir, ""));
                 console.log("changed:" + singleFile);
-                Script.scss(projectName, singleFile);
+                Script.json(projectName, singleFile);
             });
-        // cmpt - scss
-        gulp.watch([stylePath.concat("**/*.scss"), cmptPath.concat("**/*.scss")], ["scss"]);
+        
 
         // src - less
         gulp.watch([srcPath.concat("**/*.app.less")])
@@ -125,22 +124,20 @@ gulp.task("watch:release", function () {
         gulp.watch([cmptPath.concat("**/*.js")], ["webpack:release"]);
 
         // res - img 
-        gulp.watch([resPath.concat("**/*")])
+        gulp.watch([resPath.concat("img/**/*")])
             .on("change", function (file) {
                 var singleFile = ".".concat(file.path.replace(currentDir, ""));
                 console.log("changed:" + singleFile);
-                Script.img(projectName, singleFile);
+                Script.img_release(projectName, singleFile);
             });
-
-        // src - scss
-        gulp.watch([srcPath.concat("**/*.app.scss")])
+        
+        // res - json 
+        gulp.watch([resPath.concat("json/**/*")])
             .on("change", function (file) {
                 var singleFile = ".".concat(file.path.replace(currentDir, ""));
                 console.log("changed:" + singleFile);
-                Script.scss_release(projectName, singleFile);
+                Script.json_release(projectName, singleFile);
             });
-        // cmpt - scss
-        gulp.watch([stylePath.concat("**/*.scss"), cmptPath.concat("**/*.scss")], ["scss:release"]);
 
         // src - less
         gulp.watch([srcPath.concat("**/*.app.less")])

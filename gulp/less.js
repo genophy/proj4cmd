@@ -10,7 +10,7 @@ var gulp = require("gulp"),
  * 优先级 (最大级若存在且不为空文件，则只编译最大级别到 *.app.css。若*.app.js以上级别的文件都为空文件，则不进行编译 )
  * 
  * 
- * *.app.css <_ *.app.less <_ *.app.scss
+ * *.app.css <_ *.app.less
  */
 gulp.task("less", function () {
 	return Script.less();
@@ -24,7 +24,7 @@ gulp.task("less", function () {
  * 优先级 (最大级若存在且不为空文件，则只编译最大级别到 *.app.css。若*.app.js以上级别的文件都为空文件，则不进行编译 )
  * 
  * 
- * *.app.css <_ *.app.less <_ *.app.scss
+ * *.app.css <_ *.app.less
  */
 gulp.task("less:release", function () {
 	return Script.less_release();

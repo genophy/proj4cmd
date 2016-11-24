@@ -6,7 +6,6 @@ var gulp = require("gulp"),
     uglify = require('gulp-uglifyjs'),
     fs = require("fs"),
     ts = require("gulp-typescript"),
-    scss = require("gulp-scss"),
     cssmin = require('gulp-minify-css'),
     htmlmin = require('gulp-htmlmin'),
     imagemin = require('gulp-imagemin'),
@@ -72,9 +71,6 @@ exports.cmpt3rd_release = function (projectName) {
  *   |-----less
  *   |-------site.less
  *   |-------variable.less
- *   |-----scss
- *   |-------site.scss
- *   |-------variable.scss
  * 
  */
 
@@ -109,7 +105,6 @@ exports.create_init = function (projectName) {
  *    |-----viewname.app.html
  *    |-----viewname.app.js
  *    |-----viewname.app.less
- *    |-----viewname.app.scss
  *    |-----viewname.app.ts`
  * 
  */
@@ -234,6 +229,41 @@ exports.img_release = function (projectName, singleFile) {
         .pipe(gulp.dest(releasePath));
 };
 
+/*
+ * json复制
+ */
+exports.json = function (projectName, singleFile) {
+    projectName = projectName || Config.gulpArgumentNameExist(process, "project");
+    singleFile = singleFile || Config.gulpArgumentNameExist(process, "singlefile");
+    if (!projectName) {
+        throw new Error("json no projectname");
+    }
+    var srcPath = "./src/#project#/res/json/".replace("#project#", projectName),
+        devPath = srcPath.replace("./src", "./dest/dev").replace("/style/", "/res/");
+    // 若是单个文件，则src改成单文件路径
+    srcPath = singleFile || srcPath.concat("**/*");
+
+    return gulp.src(srcPath)
+        .pipe(gulp.dest(devPath));
+};
+
+/*
+ * json复制
+ */
+exports.json_release = function (projectName, singleFile) {
+    projectName = projectName || Config.gulpArgumentNameExist(process, "project");
+    singleFile = singleFile || Config.gulpArgumentNameExist(process, "singlefile");
+    if (!projectName) {
+        throw new Error("json no projectname");
+    }
+    var srcPath = "./src/#project#/res/json/".replace("#project#", projectName),
+        releasePath = srcPath.replace("./src", "./dest/release").replace("/style/", "/res/");
+    // 若是单个文件，则src改成单文件路径
+    srcPath = singleFile || srcPath.concat("**/*");
+
+    return gulp.src(srcPath)
+        .pipe(gulp.dest(releasePath));
+};
 
 /*
  * 脚本编译
@@ -243,7 +273,7 @@ exports.img_release = function (projectName, singleFile) {
  * 优先级 (最大级若存在且不为空文件，则只编译最大级别到 *.app.css。若*.app.js以上级别的文件都为空文件，则不进行编译 )
  * 
  * 
- * *.app.css <_ *.app.less <_ *.app.scss
+ * *.app.css <_ *.app.less
  */
 exports.less = function (projectName, singleFile) {
     projectName = projectName || Config.gulpArgumentNameExist(process, "project");
@@ -275,7 +305,7 @@ exports.less = function (projectName, singleFile) {
  * 优先级 (最大级若存在且不为空文件，则只编译最大级别到 *.app.css。若*.app.js以上级别的文件都为空文件，则不进行编译 )
  * 
  * 
- * *.app.css <_ *.app.less <_ *.app.scss
+ * *.app.css <_ *.app.less
  */
 exports.less_release = function (projectName, singleFile) {
     projectName = projectName || Config.gulpArgumentNameExist(process, "project");
@@ -298,71 +328,7 @@ exports.less_release = function (projectName, singleFile) {
         .pipe(cssmin())
         .pipe(gulp.dest(releasePath));
 };
-
-
-/*
- * 脚本编译
- * 
- * 将 *.app.scss 编译成为同目录下的*.app.css
- * 
- * 优先级 (最大级若存在且不为空文件，则只编译最大级别到 *.app.css。若*.app.js以上级别的文件都为空文件，则不进行编译 )
- * 
- * 
- * *.app.css <_ *.app.scss
- */
-exports.scss = function (projectName, singleFile) {
-    projectName = projectName || Config.gulpArgumentNameExist(process, "project");
-    singleFile = singleFile || Config.gulpArgumentNameExist(process, "singlefile");
-    if (!projectName) {
-        throw new Error("scss no projectname");
-    }
-    var srcPath = "./src/#project#/view/".replace("#project#", projectName),
-        devPath = srcPath.replace("./src", "./dest/dev").replace("/view/", "/css/");
-    // 若是单个文件，则src改成单文件路径
-    srcPath = singleFile || srcPath.concat("**/*.app.scss");
-
-    return gulp.src(srcPath)
-        .pipe(scss())
-        .pipe(autoprefixer())
-        .pipe(rename(function (path) {
-            path.basename = path.basename.replace(".app", "");
-            path.dirname = path.basename;
-        }))
-        .pipe(gulp.dest(devPath));
-};
-
-
-/*
- * 脚本编译(release)
- * 
- * 将 *.app.scss 编译成为同目录下的*.app.css
- * 
- * 优先级 (最大级若存在且不为空文件，则只编译最大级别到 *.app.css。若*.app.js以上级别的文件都为空文件，则不进行编译 )
- * 
- * 
- * *.app.css <_ *.app.scss
- */
-exports.scss_release = function (projectName, singleFile) {
-    projectName = projectName || Config.gulpArgumentNameExist(process, "project");
-    singleFile = singleFile || Config.gulpArgumentNameExist(process, "singlefile");
-    if (!projectName) {
-        throw new Error("scss_release no projectname");
-    }
-    var srcPath = "./src/#project#/view/".replace("#project#", projectName),
-        releasePath = srcPath.replace("./src", "./dest/release").replace("/view/", "/css/");
-    // 若是单个文件，则src改成单文件路径
-    srcPath = singleFile || srcPath.concat("**/*.app.scss");
-
-    return gulp.src(srcPath)
-        .pipe(scss())
-        .pipe(autoprefixer())
-        .pipe(rename(function (path) {
-            path.basename = path.basename.replace(".app", "");
-            path.dirname = path.basename;
-        }))
-        .pipe(cssmin())
-        .pipe(gulp.dest(releasePath));
-};
+ 
 
 
 /*
