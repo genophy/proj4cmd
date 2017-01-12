@@ -1,9 +1,21 @@
 @import "variable";
+html,body {
+    width:100%;
+    height:100%;
+    padding:0px;
+    margin:0px;
+}
+
 input,button,textarea{
     &.no-style{
         border:0px;
+        padding:0px;
+        margin:0px; 
         background:none; 
     }
+}
+textarea{
+  resize: none;
 }
 .flex-row,.flex-column{
     display: flex;
@@ -46,7 +58,13 @@ input,button,textarea{
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
-
+.word-break-all{
+  word-wrap: break-word;
+  word-break:break-all;
+}
+.hidden{
+  display:none;   
+}
 .mp_loop(@counter) when (@counter < 21){
     .m-all-@{counter}{
         margin: 5px * @counter;
