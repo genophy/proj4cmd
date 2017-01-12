@@ -1,5 +1,10 @@
 @import "variable";
-
+input,button,textarea{
+    &.no-style{
+        border:0px;
+        background:none; 
+    }
+}
 .flex-row,.flex-column{
     display: flex;
     flex-wrap: nowrap;
@@ -36,6 +41,10 @@
 }
 .flex-shrink{
     flex-shrink: 0;
+}
+.scroll-y{
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .mp_loop(@counter) when (@counter < 21){
