@@ -12,6 +12,7 @@ var gulp = require("gulp"),
     less = require("gulp-less"),
     autoprefixer = require('gulp-autoprefixer'),
     webpack = require("gulp-webpack"),
+    plumber = require("gulp-plumber"),
     Config = require("./config");
 
 /**
@@ -184,7 +185,7 @@ exports.html_release = function (projectName, singleFile) {
             path.basename = path.basename.replace(".app", "");
             path.dirname = path.basename;
         }))
-        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(gulp.dest(releasePath));
 };
 
@@ -287,6 +288,7 @@ exports.less = function (projectName, singleFile) {
     srcPath = singleFile || srcPath.concat("**/*.app.less");
 
     return gulp.src(srcPath)
+        .pipe(plumber())
         .pipe(less())
         .pipe(autoprefixer())
         .pipe(rename(function (path) {
@@ -319,6 +321,7 @@ exports.less_release = function (projectName, singleFile) {
     srcPath = singleFile || srcPath.concat("**/*.app.less");
 
     return gulp.src(srcPath)
+        .pipe(plumber())
         .pipe(less())
         .pipe(autoprefixer())
         .pipe(rename(function (path) {
@@ -328,7 +331,7 @@ exports.less_release = function (projectName, singleFile) {
         .pipe(cssmin())
         .pipe(gulp.dest(releasePath));
 };
- 
+
 
 
 /*

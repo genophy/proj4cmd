@@ -1,1 +1,66 @@
 @import "variable";
+
+.flex-row,.flex-column{
+    display: flex;
+    flex-wrap: nowrap;
+    &.wrap{
+        flex-wrap: wrap;
+    }
+    &.start{
+        justify-content: flex-start;
+    }
+    &.end{
+        justify-content: flex-end;
+    }
+    &.around{
+        justify-content: space-around;
+    }
+    &.between{
+        justify-content: space-between;
+    }
+    &.center{
+        justify-content: center;
+    }
+    &.middle{
+        align-items: center;
+    }
+}
+.flex-row{
+    flex-direction: row;
+}
+.flex-column{
+    flex-direction: column;
+}
+.flex-grow{
+    flex-grow: 1;
+}
+.flex-shrink{
+    flex-shrink: 0;
+}
+
+.mp_loop(@counter) when (@counter < 21){
+    .m-all-@{counter}{
+        margin: 5px * @counter;
+    }
+    .m-v-@{counter}{
+        margin-top: 5px * @counter;
+        margin-bottom: 5px * @counter;
+    }
+    .m-h-@{counter}{
+        margin-left: 5px * @counter;
+        margin-right: 5px * @counter;
+    }
+    .p-all-@{counter}{
+        padding: 5px * @counter;
+    }
+    .p-v-@{counter}{
+        padding-top: 5px * @counter;
+        padding-bottom: 5px * @counter;
+    }
+    .p-h-@{counter}{
+        padding-left: 5px * @counter;
+        padding-right: 5px * @counter;
+    }
+    .mp_loop(@counter + 1);
+}
+.mp_loop(1);
