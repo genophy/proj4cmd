@@ -1,0 +1,133 @@
+@import  "./module/cmpt/less/site"; 
+@import "variable";
+
+html,body {
+    width:100%;
+    height:100%;
+    padding:0px;
+    margin:0px;
+}
+
+bottom,input,textarea{
+    border:0px;
+    padding:0px;
+    margin:0px;
+}
+
+textarea{
+  resize: none;
+}
+
+.e_hidden{
+  display:none;   
+}
+
+.e_template{
+  display:none;   
+}
+
+.e_word-break-all{
+  word-wrap: break-word;
+  word-break:break-all;
+}
+
+.e_scroll-y{
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.e_line-1{
+  white-space: nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+}
+.e_line-2{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.e_flex-row{
+  display: flex;
+  flex-flow: row nowrap;
+  &.wrap{
+    flex-wrap: wrap;
+  }
+  &.wrap-reserver{
+    flex-wrap: wrap-reverse;
+  }
+  &.e_start{
+    justify-content: flex-start;
+  }
+  &.e_end{
+    justify-content: flex-end;
+  }
+  &.e_center{
+    justify-content: center;
+  }
+}
+
+.e_flex-grow{
+  flex-grow: 1;
+}
+
+.e_flex-shrink{
+  flex-shrink: 0;
+}
+
+.e_flex-item-center{
+  align-items: center;
+}
+
+@e_directions:top,left,right,bottom;
+.e_margin-dir-loop(@dir_name,@counter) when(@counter <= 20){
+    .e_m-@{dir_name}-@{counter}0{
+      margin-@{dir_name}: @counter*10px;
+  }
+  .e_margin-dir-loop(@dir_name,@counter+1);
+}
+.e_margin_direction_iter(@counter) when (@counter < length(@e_directions)){
+  .e_margin-dir-loop(extract(@e_directions,@counter), 1);
+  .e_margin_direction_iter(@counter+1);
+}
+.e_margin_direction_iter(1);
+
+.e_margin_direction_iter_all(@counter) when(@counter <= 20){
+    .e_m-all-@{counter}0{
+      margin: @counter*10px;
+  }
+  .e_margin_direction_iter_all(@counter+1);
+}
+.e_margin_direction_iter_all(1);
+
+
+.e_pading-dir-loop(@dir_name,@counter) when(@counter <= 20){
+    .e_p-@{dir_name}-@{counter}0{
+      padding-@{dir_name}: @counter*10px;
+  }
+  .e_pading-dir-loop(@dir_name,@counter+1);
+}
+.e_padding_direction_iter(@counter) when (@counter < length(@e_directions)){
+  .e_pading-dir-loop(extract(@e_directions,@counter), 1);
+  .e_padding_direction_iter(@counter+1);
+}
+.e_padding_direction_iter(1);
+
+.e_padding_direction_iter_all(@counter) when(@counter <= 20){
+    .e_p-all-@{counter}0{
+      padding: @counter*10px;
+  }
+  .e_padding_direction_iter_all(@counter+1);
+}
+.e_padding_direction_iter_all(1);
+
+.e_square_size_iter(@counter) when (@counter <= 128){
+  .e_square-size-@{counter}0{
+    width:@counter*10px;
+    height:@counter*10px;
+  }
+  .e_square_size_iter(@counter*2)
+}
+.e_square_size_iter(1);

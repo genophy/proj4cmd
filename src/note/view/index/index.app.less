@@ -1,0 +1,81 @@
+@import  "../../style/less/site"; 
+.page-container {
+    height: 100%;
+}
+.left-side{
+    width:@width-sub;
+}
+
+.btn-radius{
+    .p-all-2;
+    .m-all-1;
+    border:1px solid @color-black-1;
+    border-radius: 5px;
+    &:hover{
+        cursor: pointer;
+        background-color: @color-black-3;
+    }
+}
+
+.ctrl-list{
+    .ctrl-item{
+        .btn-radius;
+    }
+}
+
+.link-list{
+    .link-item{
+        .btn-radius;
+    } 
+}
+ 
+.gradient-root{
+     position: relative;
+    .gradient-container{
+        &-v{
+            &:before{
+                content: ""; 
+                height:40%;
+                background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#3a3a3a), to(#fff));
+                position: absolute;
+                top:0px;
+                left:0px;
+                right:0px;
+                z-index: -1;
+            }
+            &:after{
+                content: ""; 
+                height:40%;
+                background: -webkit-gradient(linear, 0% 100%, 0% 0%,from(#3a3a3a), to(#fff));
+                position: absolute;
+                bottom:0px;
+                left:0px;
+                right:0px;
+                z-index: -1;
+            }
+        }
+
+        &-h{
+            &:before{
+                content: "";  
+                background: -webkit-gradient(linear, 0% 0%, 100% 0%,from(#3a3a3a), to(#fff));
+                position: absolute; 
+                top:0px;
+                left:0px;
+                right: 50%;
+                bottom:0px;
+                z-index: -1;
+            }
+            &:after{
+                content: "";  
+                background: -webkit-gradient(linear, 150% 0%, 0% 0%,from(#3a3a3a), to(#fff));
+                position: absolute;
+                top:0px; 
+                left:50%;
+                right:0px;
+                bottom:0px;
+                z-index: -1;
+            }
+        }
+    }
+}
