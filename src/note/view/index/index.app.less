@@ -1,41 +1,45 @@
-@import  "../../style/less/site"; 
+@import "../../style/less/site";
 .page-container {
     height: 100%;
 }
-.left-side{
-    width:@width-sub;
+
+.left-side {
+    width: @width-sub;
 }
 
-.btn-radius{
+.btn-radius {
     .p-all-2;
     .m-all-1;
-    border:1px solid @color-black-1;
+    border: 1px solid @color-black-1;
     border-radius: 5px;
-    &:hover{
+    &:hover {
         cursor: pointer;
         background-color: @color-black-3;
     }
 }
- 
-.ctrl-list .ctrl-item,.link-list .link-item{
+
+.ctrl-list .ctrl-item,
+.link-list .link-item {
     .btn-radius;
-} 
-  
-@keyframes myfirst
-{
-    from {background: red; }
-    to {background: yellow;}
 }
 
+@keyframes myfirst {
+    from {
+        background: red;
+    }
+    to {
+        background: yellow;
+    }
+}
 
-.box-anim{
+.box-anim {
     animation-name: myfirst;
     animation-duration: 5s;
-    animation-timing-function: linear; 
+    animation-timing-function: linear;
     animation-iteration-count: 1;
-    animation-direction: alternate;  
-    &:hover{ 
-        transform:translate(100px);
-        transition-duration: 0.2s; 
+    animation-direction: alternate;
+    &:hover {
+        transform: translate(100px);
+        transition-duration: 0.2s;
     }
 }
