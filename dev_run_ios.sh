@@ -10,8 +10,8 @@ if [ $project ] ; then
 	end tell" -e "tell app \"terminal\"
 		do script \"cd $gulp_root_path;gulp watch --project=$project\"
 	end tell" -e "tell app \"terminal\"
-		do script \"cd $gulp_root_path;gulp serve --project=$project\"
-	end tell"
+		do script \"cd $gulp_root_path;gulp express --project=$project\"
+	end tell"  #gulp serve --project=$project\"
 else
     echo ""
 fi
