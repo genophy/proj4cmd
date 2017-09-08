@@ -35,7 +35,7 @@ gulp.task("watch", function () {
         gulp.watch([cmptPath.concat("**/*.ts")], ["tsc"]);
 
         // src - js
-        gulp.watch([srcPath.concat("**/*.app.js")])
+        gulp.watch([srcPath.concat("**/*.app.ts")])
             .on("change", function (file) {
                 var singleFile = ".".concat(file.path.replace(currentDir, ""));
                 console.log("changed:" + singleFile);
@@ -113,7 +113,7 @@ gulp.task("watch:release", function () {
         gulp.watch([cmptPath.concat("**/*.ts")], ["tsc"]);
 
         // src - js
-        gulp.watch([srcPath.concat("**/*.app.js")])
+        gulp.watch([srcPath.concat("**/*.app.ts")])
             .on("change", function (file) {
                 var singleFile = ".".concat(file.path.replace(currentDir, ""));
                 console.log("changed:" + singleFile);
